@@ -3,7 +3,7 @@
 $accent: #2ece90;
 
 $gray-100: #f8f9fa;
-$gray-300: #dee2e6;
+$gray-300: rgb(222, 226, 230);
 $gray-500: #adb5bd;
 $gray-700: #495057;
 $gray-900: #212529;
@@ -14,8 +14,9 @@ $danger: #dc3545;
 $warning: #ffc107;
 
 $dark-theme: (
-  bg-primary: #010b16,
-  bg-secondary: #070f18,
+  bg-primary: rgb(1, 11, 22),
+  bg-primary-overlay: rgba(1, 11, 22, 0.5),
+  bg-secondary: rgb(7, 15, 24),
   text-primary: $gray-300,
   text-secondary: $gray-700,
 
@@ -29,7 +30,8 @@ $dark-theme: (
 
 $light-theme: (
   bg-primary: $gray-300,
-  bg-secondary: #edf8f7,
+  bg-primary-overlay: rgba(94, 109, 101, 0.5),
+  bg-secondary: rgb(237, 248, 247),
   text-primary: $gray-900,
   text-secondary: $gray-700,
   accent: color.adjust($accent, $blackness: 15%),

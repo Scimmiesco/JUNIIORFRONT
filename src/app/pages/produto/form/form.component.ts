@@ -17,9 +17,10 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../../models/IProduct.interface';
 import { ProductService } from '../../../components/products/product.service';
 import { CurrencyMaskDirective } from '../../../directives/currency-mask.directive';
-import { Router } from '@angular/router';
 import { ProductCartComponent } from '../../../shared/components/back-header.component';
 import { urlValidator } from '../../../validators/url.validator';
+import { ProductStateService } from '../../../components/products/product-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -36,6 +37,8 @@ import { urlValidator } from '../../../validators/url.validator';
 export class ProductFormComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly productService = inject(ProductService);
+  private readonly _productStateService = inject(ProductStateService);
+  private readonly _router = inject(Router);
 
   @Input() product?: Product;
   @Output() formSubmitted = new EventEmitter<Product>();
@@ -66,7 +69,13 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.create(formValue).subscribe((result) => {
       this.formSubmitted.emit(result.data);
+      this._productStateService.products.update((currentProducts) => [
+        ...currentProducts,
+        result.data,
+      ]);
+      this._productStateService.updateCache();
       this.productForm.reset();
+      this._router.navigate(['../']);
     });
   }
 }

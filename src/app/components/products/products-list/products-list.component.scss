@@ -17,9 +17,20 @@
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0 1rem;
+    .title {
+      display: flex;
+      gap: 0.5rem;
+      ._counter {
+        text-align: center;
+        background-color: var(--accent);
+        border-radius: g.$border-radius-pill;
+        aspect-ratio: 1/1;
+        padding: 0.25rem;
+      }
 
-    h2 {
-      text-wrap: nowrap;
+      h2 {
+        text-wrap: nowrap;
+      }
     }
   }
 

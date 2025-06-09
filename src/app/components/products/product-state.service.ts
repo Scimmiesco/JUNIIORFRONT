@@ -1,10 +1,18 @@
-import { Injectable, inject, signal, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Injectable,
+  inject,
+  signal,
+  PLATFORM_ID,
+  Inject,
+  computed,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY } from 'rxjs';
 import { tap, catchError, finalize } from 'rxjs/operators';
 import { Product } from '../../models/IProduct.interface';
 import { ProductService } from './product.service';
+import { LoadingService } from '../../shared/loading-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +20,9 @@ import { ProductService } from './product.service';
 export class ProductStateService {
   private productHttp = inject(ProductService);
   private platformId = inject(PLATFORM_ID);
+  private readonly isLoading = inject(LoadingService);
 
   products = signal<Product[]>([]);
-  isLoading = signal<boolean>(false);
   hasMore = signal<boolean>(true);
 
   private pageNumber = 1;
@@ -23,17 +31,16 @@ export class ProductStateService {
   private readonly PRODUCTS_CACHE_KEY = 'products_cache';
   private readonly HAS_MORE_CACHE_KEY = 'has_more_cache';
 
+  totalProducts = computed(() => this.products().length);
+
   constructor() {
     this.loadInitialDataFromCache();
   }
 
   loadMore(): void {
-    if (this.isLoading() || !this.hasMore()) {
+    if (this.isLoading.isLoading() || !this.hasMore()) {
       return;
     }
-
-    this.isLoading.set(true);
-    const offset = this.pageNumber * this.pageSize;
 
     this.productHttp
       .getAllpaginated({
@@ -53,12 +60,9 @@ export class ProductStateService {
           this.updateCache();
         }),
         catchError((err) => {
-          this.hasMore.set(false);
+          this.hasMore.set(true);
           this.updateCache();
           return EMPTY;
-        }),
-        finalize(() => {
-          this.isLoading.set(false);
         })
       )
       .subscribe();
@@ -72,12 +76,14 @@ export class ProductStateService {
 
         if (cachedProducts) {
           const products = JSON.parse(cachedProducts);
-          this.products.set(products);
-          this.pageNumber = Math.ceil(products.length / this.pageSize);
-        }
+          if (products.length > 0) {
+            this.products.set(products);
+            this.pageNumber = Math.ceil(products.length / this.pageSize);
 
-        if (cachedHasMore !== null && cachedHasMore !== undefined) {
-          this.hasMore.set(JSON.parse(cachedHasMore));
+            if (cachedHasMore !== null && cachedHasMore !== undefined) {
+              this.hasMore.set(JSON.parse(cachedHasMore));
+            }
+          }
         }
       } catch (error) {
         this.clearCache();
@@ -85,18 +91,17 @@ export class ProductStateService {
     }
   }
 
-  private updateCache(): void {
+  updateCache(): void {
     if (isPlatformBrowser(this.platformId)) {
-      try {
-        sessionStorage.setItem(
-          this.PRODUCTS_CACHE_KEY,
-          JSON.stringify(this.products())
-        );
-        sessionStorage.setItem(
-          this.HAS_MORE_CACHE_KEY,
-          JSON.stringify(this.hasMore())
-        );
-      } catch (error) {}
+      console.log(this.products(), 'que esranho');
+      sessionStorage.setItem(
+        this.PRODUCTS_CACHE_KEY,
+        JSON.stringify(this.products())
+      );
+      sessionStorage.setItem(
+        this.HAS_MORE_CACHE_KEY,
+        JSON.stringify(this.hasMore())
+      );
     }
   }
 

@@ -1,0 +1,36 @@
+@use "styles/main" as *;
+
+:host {
+  display: block;
+  width: 100%;
+
+  .cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+
+    border-radius: $border-radius-lg;
+    background-color: var(--bg-secondary);
+
+    ._item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border: 1px solid var(--accent);
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+
+      ._image {
+        width: 64px;
+        height: 64px;
+        position: relative;
+
+        img {
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

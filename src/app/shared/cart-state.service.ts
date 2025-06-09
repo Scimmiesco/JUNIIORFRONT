@@ -8,11 +8,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ProductStateService } from '../components/products/product-state.service';
-
-export interface CartItem {
-  id: number;
-  quantity: number;
-}
+import { CartItem, CartProduct } from '../models/ICart.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -52,18 +48,27 @@ export class CartStateService {
     });
   }
 
-  addProduct(productId: number): void {
+  addProduct(product: CartProduct): void {
     this.cartItems.update((currentItems) => {
-      const itemInCart = currentItems.find((item) => item.id === productId);
+      const itemInCart = currentItems.find((item) => item.id === product.id);
 
       if (itemInCart) {
         return currentItems.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity + 1 }
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                totalPrice: item.price * (item.quantity + 1),
+              }
             : item
         );
       } else {
-        return [...currentItems, { id: productId, quantity: 1 }];
+        const newItem: CartItem = {
+          ...product,
+          quantity: 1,
+          totalPrice: product.price,
+        };
+        return [...currentItems, newItem];
       }
     });
   }

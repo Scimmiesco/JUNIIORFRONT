@@ -5,6 +5,7 @@
   align-content: center;
   min-height: 100svh;
   justify-content: space-between;
+  position: relative;
 }
 
 .main-content {
@@ -14,4 +15,19 @@
   max-width: 980px;
   width: 100%;
   flex: 1;
+}
+
+.loading-indicator {
+  position: absolute;
+  background: var(--bg-primary-overlay);
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }

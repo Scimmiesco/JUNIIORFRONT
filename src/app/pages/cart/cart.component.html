@@ -1,0 +1,15 @@
+<app-back-header title="Carrinho de compras"></app-back-header>
+<ul class="cart-container">
+  @for( item of cartStateService.items(); track item.id ) {
+  <li class="_item">
+    <div class="_image">
+      <img
+        fill
+        ngSrc="https://placehold.co/300x200/3b82f6/white?text=Notebook+SQL"
+      />
+    </div>
+    <span>{{ item.id }}</span>
+    <span>{{ item.quantity }}</span>
+  </li>
+  }
+</ul>

@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, computed, inject, Inject, Signal } from '@angular/core';
 import { CartStateService } from '../../shared/cart-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import { CartStateService } from '../../shared/cart-state.service';
 })
 export class HeaderComponent {
   private readonly _cartStateService = inject(CartStateService);
+  private readonly _router = inject(Router);
 
   isDarkTheme = false;
   countItensCart: Signal<number> = this._cartStateService.totalItems;
@@ -19,5 +21,9 @@ export class HeaderComponent {
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
     this.document.body.classList.toggle('dark-theme', this.isDarkTheme);
+  }
+
+  openCart() {
+    this._router.navigate(['cart']);
   }
 }

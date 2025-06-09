@@ -1,5 +1,8 @@
 <div class="header">
-  <h2>Lista de Produtos</h2>
+  <div class="title">
+    <h2>Lista de Produtos</h2>
+    <span class="_counter">{{ productStateService.totalProducts() }}</span>
+  </div>
   <button class="btn _primary" (click)="createProduct()">
     Novo <span class="material-symbols-outlined">add</span>
   </button>

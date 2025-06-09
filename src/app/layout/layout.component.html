@@ -5,3 +5,9 @@
 </main>
 
 <app-footer></app-footer>
+
+@if(_loadingService.isLoading()) {
+<div class="loading-indicator">
+  <p>Carregando...</p>
+</div>
+}

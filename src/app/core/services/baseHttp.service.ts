@@ -14,7 +14,7 @@ import { inject } from '@angular/core';
 
 export abstract class BaseHttpService<T> {
   protected http = inject(HttpClient);
-  private readonly apiBaseUrl = 'http://localhost:5000/api';
+  private readonly apiBaseUrl = 'http://localhost:59757/api';
 
   protected endpointUrl: string;
 

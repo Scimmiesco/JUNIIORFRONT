@@ -26,6 +26,12 @@ export const routes: Routes = [
           ),
         title: 'Criar produto',
       },
+      {
+        path: 'cart',
+        loadComponent: () =>
+          import('./pages/cart/cart.component').then((m) => m.CartComponent),
+        title: 'carrinho de compras',
+      },
     ],
   },
   {

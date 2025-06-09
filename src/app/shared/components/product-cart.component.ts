@@ -29,7 +29,7 @@ import { CartStateService } from '../cart-state.service';
     right: 0;
     box-shadow: $box-shadow-lg;
     span {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 
     &:active {
@@ -46,15 +46,14 @@ import { CartStateService } from '../cart-state.service';
 export class ProductCartComponent {
   private readonly _cartService = inject(CartStateService);
 
-  productId = input.required<number>();
+  product = input.required<Product>();
 
   public readonly isInCart = computed(() =>
-    this._cartService.items().some((item) => item.id === this.productId())
+    this._cartService.items().some((item) => item.id === this.product().id)
   );
 
   addToCart(event: any): void {
     event.stopPropagation();
-    const product: Partial<Product> = { id: this.productId() };
-    if (product.id) this._cartService.addProduct(product.id);
+    this._cartService.addProduct(this.product());
   }
 }

@@ -18,11 +18,8 @@ export class ProductsListComponent implements OnInit {
   public loadingService = inject(LoadingService);
   public router = inject(Router);
 
-  isLoading = signal(true);
   ngOnInit(): void {
-    if (this.productStateService.products().length == 0) {
-      this.productStateService.loadMore();
-    }
+    this.productStateService.loadMore();
   }
 
   isNearBottom() {

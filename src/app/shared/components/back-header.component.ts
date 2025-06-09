@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
         <span class="material-symbols-outlined"> arrow_back_ios_new </span>
       </button>
       <h2>
-        {{ titulo() ?? 'Detalhe do produto' }}
+        {{ title() ?? 'Detalhe do produto' }}
       </h2>
     </div>
   `,
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
     `,
 })
 export class ProductCartComponent {
-  titulo = input();
+  title = input();
   private readonly _router = inject(Router);
 
   backToBegin() {
