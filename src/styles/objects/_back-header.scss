@@ -1,0 +1,14 @@
+.back_header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+
+  h2 {
+    text-align: start;
+  }
+
+  .button_back {
+    padding: 1rem;
+  }
+}

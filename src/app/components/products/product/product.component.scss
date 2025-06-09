@@ -1,0 +1,65 @@
+@use "styles/main" as *;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--accent);
+  height: 100%;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-sm;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  background-color: var(--bg-secondary);
+
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: var(--bg-primary);
+
+  img {
+    position: absolute;
+    object-fit: cover;
+  }
+
+  .placeholder-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  position: relative;
+
+  h3 {
+    font-size: 1.35rem;
+  }
+
+  .price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%) translateX(1px);
+    background-color: var(--bg-secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: $border-radius-pill 0 0 $border-radius-pill;
+    font-size: 1.5rem;
+    border-right: 1px solid var(--accent);
+    font-weight: bold;
+    color: var(--accent);
+  }
+}

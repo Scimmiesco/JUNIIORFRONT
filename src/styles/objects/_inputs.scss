@@ -1,0 +1,12 @@
+@use "../settings/variables" as *;
+
+input {
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-pill;
+  border: 1px solid var(--accent);
+  background-color: var(--bg-secondary);
+  &:focus {
+    outline: none;
+    border: 2px solid var(--accent);
+  }
+}

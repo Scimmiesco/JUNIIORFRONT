@@ -1,0 +1,7 @@
+@use "styles/main" as c;
+
+:host {
+  display: block;
+  background-color: var(--bg-primary) !important;
+  min-height: 100svh !important;
+}

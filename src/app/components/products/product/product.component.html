@@ -1,0 +1,27 @@
+@if(product();as product){
+<article class="product-card" (click)="openProductDetail()">
+  <div class="image-container">
+    @if (product.imageUrl) {
+    <img
+      loading="auto"
+      [ngSrc]="product!.imageUrl"
+      fill
+      alt="{{ product!.name }}"
+    />
+    } @else {
+    <div class="placeholder-image">Imagem Indisponível</div>
+    }
+    <app-product-cart-button [productId]="product.id"></app-product-cart-button>
+  </div>
+
+  <div class="product-info">
+    <span class="price">
+      {{
+        product.price | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR"
+      }}</span
+    >
+
+    <h3>{{ product.name }}</h3>
+  </div>
+</article>
+}

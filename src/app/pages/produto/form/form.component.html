@@ -1,0 +1,69 @@
+<app-back-header titulo="Adicionar produto"></app-back-header>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-field">
+    <label for="product-name">Nome do Produto</label>
+    <input
+      id="product-name"
+      type="text"
+      formControlName="name"
+      placeholder="Ex: Teclado Mecânico"
+    />
+
+    @if (productForm.get('name')?.invalid && (productForm.get('name')?.touched
+    || productForm.get('name')?.dirty)) {
+    <div class="error-message">
+      @if (productForm.get('name')?.hasError('required')) {
+      <span>O nome do produto é obrigatório.</span>
+      } @if (productForm.get('name')?.hasError('minlength')) {
+      <span>O nome deve ter no mínimo 3 caracteres.</span>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="form-field">
+    <label for="product-price">Preço</label>
+    <input
+      appCurrencyMask
+      id="product-price"
+      type="text"
+      formControlName="price"
+      placeholder="R$ 0,00"
+    />
+
+    @if (productForm.get('price')?.invalid && (productForm.get('price')?.touched
+    || productForm.get('price')?.dirty)) {
+    <div class="error-message">
+      @if (productForm.get('price')?.hasError('required')) {
+      <span>O preço é obrigatório.</span>
+      } @if (productForm.get('price')?.hasError('min')) {
+      <span>O preço deve ser maior que R$ 0,00.</span>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="form-field">
+    <label for="product-image-url">URL da Imagem</label>
+    <input
+      id="product-image-url"
+      type="text"
+      formControlName="imageUrl"
+      placeholder="https://placehold.co/..."
+    />
+    @if (productForm.get('imageUrl')?.invalid &&
+    (productForm.get('imageUrl')?.touched ||
+    productForm.get('imageUrl')?.dirty)) {
+    <div class="error-message">
+      @if (productForm.get('imageUrl')?.hasError('invalidUrl')) {
+      <span>Por favor, insira uma URL válida.</span>
+      }
+    </div>
+    }
+  </div>
+
+  <button class="btn _primary" type="submit" [disabled]="productForm.invalid">
+    <h3>Salvar Produto</h3>
+  </button>
+</form>

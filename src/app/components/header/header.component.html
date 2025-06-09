@@ -1,0 +1,14 @@
+<button type="button" (click)="toggleTheme()" aria-label="Trocar tema">
+  <span class="material-symbols-outlined">
+    {{ isDarkTheme ? "dark_mode" : "light_mode" }}
+  </span>
+</button>
+<h1>JUNIOR I TESTE</h1>
+<button
+  class="cart _container"
+  type="button"
+  aria-label="Abrir carrinho de compras"
+>
+  <span class="cart _counter">{{ countItensCart() }}</span>
+  <span class="cart _icon material-symbols-outlined"> shopping_cart </span>
+</button>

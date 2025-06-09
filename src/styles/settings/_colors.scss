@@ -1,0 +1,59 @@
+@use "sass:color";
+
+$accent: #2ece90;
+
+$gray-100: #f8f9fa;
+$gray-300: #dee2e6;
+$gray-500: #adb5bd;
+$gray-700: #495057;
+$gray-900: #212529;
+$black: #000000;
+
+$success: #28a745;
+$danger: #dc3545;
+$warning: #ffc107;
+
+$dark-theme: (
+  bg-primary: #010b16,
+  bg-secondary: #070f18,
+  text-primary: $gray-300,
+  text-secondary: $gray-700,
+
+  accent: color.adjust($accent, $blackness: 15%),
+  border-color: $gray-700,
+
+  feedback-success: $success,
+  feedback-danger: $danger,
+  feedback-warning: $warning,
+);
+
+$light-theme: (
+  bg-primary: $gray-300,
+  bg-secondary: #edf8f7,
+  text-primary: $gray-900,
+  text-secondary: $gray-700,
+  accent: color.adjust($accent, $blackness: 15%),
+  border-color: $gray-300,
+
+  feedback-success: $success,
+  feedback-danger: $danger,
+  feedback-warning: $warning,
+);
+
+:root {
+  @each $key, $value in $light-theme {
+    --#{$key}: #{$value};
+  }
+}
+
+body.dark-theme {
+  @each $key, $value in $dark-theme {
+    --#{$key}: #{$value};
+  }
+}
+
+* {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+  color: var(--text-primary);
+}

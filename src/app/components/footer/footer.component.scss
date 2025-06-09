@@ -1,0 +1,12 @@
+@use "styles/main" as c;
+
+:host {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  padding: 0.75rem 0;
+}

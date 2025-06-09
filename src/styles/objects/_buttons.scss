@@ -1,0 +1,20 @@
+@use "../settings/variables" as v;
+
+.btn {
+  display: flex;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  text-align: center;
+  text-wrap: nowrap;
+  flex-wrap: nowrap;
+
+  &._primary {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--accent);
+    border-radius: v.$border-radius-pill;
+
+    &:hover {
+      background-color: var(--accent);
+    }
+  }
+}
