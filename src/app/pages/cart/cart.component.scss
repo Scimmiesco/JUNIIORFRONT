@@ -2,17 +2,14 @@
 
 :host {
   display: block;
-  width: 100%;
+  width: 98%;
 
   .cart-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap: 1rem;
-    padding: 1rem;
-
+    justify-content: space-between;
     border-radius: $border-radius-lg;
-    background-color: var(--bg-secondary);
+    gap: 1rem;
 
     ._item {
       display: flex;
@@ -21,16 +18,61 @@
       border: 1px solid var(--accent);
       border-radius: $border-radius-lg;
       overflow: hidden;
+      background-color: var(--bg-secondary);
 
       ._image {
-        width: 64px;
-        height: 64px;
+        width: 82px;
+        height: 82px;
+        min-height: 100%;
         position: relative;
-
         img {
           object-fit: cover;
         }
       }
+
+      ._info {
+        display: flex;
+        height: 100%;
+        flex: 1;
+        justify-content: start;
+        gap: 0.5rem;
+        flex-direction: column;
+        align-items: start;
+        padding-left: 0.5rem;
+        overflow: hidden;
+
+        h1 {
+          font-size: 1.5rem !important;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        ._total-price {
+          font-weight: bold;
+          font-size: 1.25rem;
+          padding: 0 0.5rem;
+        }
+      }
+
+      ._quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--accent);
+        border-radius: $border-radius-pill;
+
+        ._icon {
+          font-size: 2.5rem;
+
+          &._delete {
+            font-size: 1.5rem;
+          }
+        }
+      }
     }
   }
+h2{
+  align-self: self-end;
+  text-align: end;
+  padding: 0.5rem 1rem;
+}
 }

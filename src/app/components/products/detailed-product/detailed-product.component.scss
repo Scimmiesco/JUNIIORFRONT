@@ -11,15 +11,25 @@
     width: 100%;
     margin: 0 auto;
     min-height: 33vh;
-
+    .delete {
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      transform: translateX(-32px);
+      z-index: 99;
+    }
     img {
       object-fit: cover;
     }
   }
 
+  h1 {
+    padding: 0.5rem 1rem;
+  }
+
   .price {
     align-self: flex-end;
     font-size: 1.5rem;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
   }
 }

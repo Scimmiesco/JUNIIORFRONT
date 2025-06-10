@@ -21,6 +21,7 @@ import { ProductCartComponent } from '../../../shared/components/back-header.com
 import { urlValidator } from '../../../validators/url.validator';
 import { ProductStateService } from '../../../components/products/product-state.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-product-form',
@@ -39,6 +40,7 @@ export class ProductFormComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly _productStateService = inject(ProductStateService);
   private readonly _router = inject(Router);
+  private readonly _notificationService = inject(NotificationService);
 
   @Input() product?: Product;
   @Output() formSubmitted = new EventEmitter<Product>();
@@ -68,14 +70,20 @@ export class ProductFormComponent implements OnInit {
     const formValue = this.productForm.value;
 
     this.productService.create(formValue).subscribe((result) => {
-      this.formSubmitted.emit(result.data);
-      this._productStateService.products.update((currentProducts) => [
-        ...currentProducts,
-        result.data,
-      ]);
-      this._productStateService.updateCache();
-      this.productForm.reset();
-      this._router.navigate(['../']);
+      if (result.success) {
+        this.formSubmitted.emit(result.data);
+        this._productStateService.products.update((currentProducts) => [
+          ...currentProducts,
+          result.data,
+        ]);
+        this._productStateService.updateCache();
+        this.productForm.reset();
+        this._router.navigate(['../']);
+        this._notificationService.show(
+          'Produto criado com sucesso!',
+          'success'
+        );
+      }
     });
   }
 }

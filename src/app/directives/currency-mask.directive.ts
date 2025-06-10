@@ -49,7 +49,6 @@ export class CurrencyMaskDirective implements OnInit {
       style: 'currency',
       currency: 'BRL',
     }).format(valueInCents);
-    console.log(this.el.nativeElement );
     this.el.nativeElement.value = formattedValue;
   }
 }

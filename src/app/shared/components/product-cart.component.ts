@@ -1,5 +1,5 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common'; // Importe para usar [class.inCart] e outras diretivas
+import { Component, computed, inject, input } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
 import { Product } from '../../models/IProduct.interface';
 import { CartStateService } from '../cart-state.service';
 
@@ -27,6 +27,7 @@ import { CartStateService } from '../cart-state.service';
     border-radius: 0 0 0 1rem;
     padding: 0.5rem;
     right: 0;
+    z-index: 99;
     box-shadow: $box-shadow-lg;
     span {
       font-size: 1.5rem;

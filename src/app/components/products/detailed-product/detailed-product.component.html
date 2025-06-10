@@ -1,4 +1,9 @@
-<div class="img"><img ngSrc="{{ product().imageUrl }}" fill /></div>
-<span class="price">
-  {{ product().price | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR" }}</span
->
+<div class="img">
+  <button class="delete" type="button" aria-label="Excluir produto" (click)="deleteProduct()">
+    <span class="material-symbols-outlined">delete</span>
+  </button>
+  <app-product-cart-button [product]="product()"></app-product-cart-button>
+  <img ngSrc="{{ product().imageUrl }}" fill />
+</div>
+<h1>{{ product().name }}</h1>
+<span class="price"> {{ product().price | currency : "BRL" }}</span>

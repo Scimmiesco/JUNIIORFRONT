@@ -93,7 +93,6 @@ export class ProductStateService {
 
   updateCache(): void {
     if (isPlatformBrowser(this.platformId)) {
-      console.log(this.products(), 'que esranho');
       sessionStorage.setItem(
         this.PRODUCTS_CACHE_KEY,
         JSON.stringify(this.products())

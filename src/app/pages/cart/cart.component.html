@@ -1,15 +1,36 @@
 <app-back-header title="Carrinho de compras"></app-back-header>
 <ul class="cart-container">
   @for( item of cartStateService.items(); track item.id ) {
-  <li class="_item">
+  <li class="_item" (click)="detailItem(item)">
     <div class="_image">
-      <img
-        fill
-        ngSrc="https://placehold.co/300x200/3b82f6/white?text=Notebook+SQL"
-      />
+      <img fill [ngSrc]="item.imageUrl" />
     </div>
-    <span>{{ item.id }}</span>
-    <span>{{ item.quantity }}</span>
+    <div class="_info">
+      <h1>{{ item.name }}</h1>
+      <div class="_total-price">
+        <span>{{ item.totalPrice | currency : "BRL" }} </span>
+      </div>
+    </div>
+    <div class="_quantity">
+      <button
+        (click)="addItemCart(item, $event)"
+        type="button"
+        aria-label="Aumentar item no carrinho"
+      >
+        <span class="material-symbols-outlined _icon">
+          arrow_drop_up
+        </span></button
+      ><span>{{ item.quantity }}</span>
+
+      <button
+        (click)="removeItemCart(item.id, $event)"
+        type="button"
+        aria-label="Diminuir item no carrinho"
+      >
+        <span class="material-symbols-outlined _icon"> arrow_drop_down </span>
+      </button>
+    </div>
   </li>
   }
 </ul>
+<h2>{{ cartStateService.totalPrice() | currency : "BRL" }}</h2>
